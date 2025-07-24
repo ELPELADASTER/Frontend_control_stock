@@ -47,7 +47,7 @@ const ListaArticulos: React.FC<ListaArticulosProps> = ({ articulos, onEditar, on
               <tr key={articulo.id} className="align-middle">
                 <td>
                   {articulo.imagen ? (
-                    <img src={`http://localhost:4000${articulo.imagen}`} alt={articulo.nombre} className="img-thumbnail shadow-sm" style={{width: 56, height: 56, objectFit: 'cover', borderRadius: '50%'}} />
+                    <img src={`${process.env.NEXT_PUBLIC_API_URL}${articulo.imagen}`} alt={articulo.nombre} className="img-thumbnail shadow-sm" style={{width: 56, height: 56, objectFit: 'cover', borderRadius: '50%'}} />
                   ) : (
                     <span className="fs-3 bg-light d-inline-flex align-items-center justify-content-center rounded-circle border shadow-sm" style={{width: 56, height: 56}}>📦</span>
                   )}

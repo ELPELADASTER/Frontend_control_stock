@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const fetchArticulos = async (empresaActual = empresa) => {
-    const res = await fetch(`http://localhost:4000/api/articulos?empresa=${encodeURIComponent(empresaActual)}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articulos?empresa=${encodeURIComponent(empresaActual)}`);
     const data = await res.json();
     setArticulos(data);
   };
@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
 
 
   const handleUtilizar = async (id: number, cantidad: number) => {
-    const res = await fetch(`http://localhost:4000/api/articulos/${id}/utilizar`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articulos/${id}/utilizar`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cantidadUtilizada: cantidad }),
@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
   // Eliminar artículo
   const handleEliminar = async (id: number) => {
     if (!window.confirm('¿Seguro que deseas eliminar este artículo?')) return;
-    const res = await fetch(`http://localhost:4000/api/articulos/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articulos/${id}`, { method: 'DELETE' });
     if (res.ok) {
       toast.success('Artículo eliminado');
       fetchArticulos();
@@ -80,7 +80,7 @@ const HomePage: React.FC = () => {
     formData.append('utilizados', String(data.utilizados));
     formData.append('empresa', data.empresa);
     if (data.imagen) formData.append('imagen', data.imagen);
-    const res = await fetch(`http://localhost:4000/api/articulos/${data.id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articulos/${data.id}`, {
       method: 'PUT',
       body: formData,
     });

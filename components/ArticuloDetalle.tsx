@@ -34,7 +34,7 @@ const ArticuloDetalle: React.FC<ArticuloDetalleProps> = ({ articulo, onUtilizar 
   return (
     <div className="glass-card p-6 flex gap-6 items-center hover:shadow-xl transition group">
       {articulo.imagen ? (
-        <img src={`http://localhost:4000${articulo.imagen}`} alt={articulo.nombre} className="rounded-xl w-24 h-24 object-cover border border-border shadow-sm" />
+        <img src={`${process.env.NEXT_PUBLIC_API_URL}${articulo.imagen}`} alt={articulo.nombre} className="rounded-xl w-24 h-24 object-cover border border-border shadow-sm" />
       ) : (
         <span className="text-4xl bg-background rounded-xl w-24 h-24 flex items-center justify-center border border-border shadow-sm">📦</span>
       )}
