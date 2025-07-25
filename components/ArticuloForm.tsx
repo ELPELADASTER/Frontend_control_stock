@@ -27,7 +27,7 @@ const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, 
     if (imagen) formData.append('imagen', imagen);
     try {
       formData.append('empresa', empresa);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articulos`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL2}/api/articulos`, {
         method: 'POST',
         body: formData,
       });
