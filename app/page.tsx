@@ -73,16 +73,11 @@ const HomePage: React.FC = () => {
   };
 
   // Guardar cambios de edición
-  const handleSaveEdit = async (data: { id: number; nombre: string; cantidad: number; utilizados: number; imagen?: File | null; empresa: string }) => {
-    const formData = new FormData();
-    formData.append('nombre', data.nombre);
-    formData.append('cantidad', String(data.cantidad));
-    formData.append('utilizados', String(data.utilizados));
-    formData.append('empresa', data.empresa);
-    if (data.imagen) formData.append('imagen', data.imagen);
+  const handleSaveEdit = async (data: { id: number; nombre: string; cantidad: number; utilizados: number; simbolo: string; empresa: string }) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL2}/api/articulos/${data.id}`, {
       method: 'PUT',
-      body: formData,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: data.nombre, cantidad: data.cantidad, utilizados: data.utilizados, simbolo: data.simbolo, empresa: data.empresa }),
     });
     if (res.ok) {
       toast.success('Artículo editado');
