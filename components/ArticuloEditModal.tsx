@@ -6,14 +6,14 @@ interface ArticuloEditModalProps {
   articulo: Articulo | null;
   open: boolean;
   onClose: () => void;
-  onSave: (data: { id: number; nombre: string; cantidad: number; utilizados: number; imagen?: File | null; empresa: string }) => void;
+  onSave: (data: { id: number; nombre: string; cantidad: number; utilizados: number; simbolo: string; empresa: string }) => void;
 }
 
 const ArticuloEditModal: React.FC<ArticuloEditModalProps> = ({ articulo, open, onClose, onSave }) => {
   const [nombre, setNombre] = useState<string>(articulo?.nombre || '');
   const [cantidad, setCantidad] = useState<number>(articulo?.cantidad || 0);
   const [utilizados, setUtilizados] = useState<number>(articulo?.utilizados || 0);
-  const [imagen, setImagen] = useState<File | null>(null);
+  const [simbolo, setSimbolo] = useState<string>(articulo?.simbolo || '📦'); // Default symbol
   const [empresa, setEmpresa] = useState<string>(articulo?.empresa || 'Telecom');
   const [error, setError] = useState<string | null>(null);
 
@@ -21,7 +21,7 @@ const ArticuloEditModal: React.FC<ArticuloEditModalProps> = ({ articulo, open, o
     setNombre(articulo?.nombre || '');
     setCantidad(articulo?.cantidad || 0);
     setUtilizados(articulo?.utilizados || 0);
-    setImagen(null);
+    setSimbolo(articulo?.simbolo || '📦');
     setEmpresa(articulo?.empresa || 'Telecom');
   }, [articulo]);
 
@@ -34,7 +34,7 @@ const ArticuloEditModal: React.FC<ArticuloEditModalProps> = ({ articulo, open, o
       setError('Verifica que el nombre no esté vacío, la cantidad sea mayor a 0 y la cantidad utilizada sea válida.');
       return;
     }
-    onSave({ id: articulo.id, nombre, cantidad, utilizados, imagen, empresa });
+    onSave({ id: articulo.id, nombre, cantidad, utilizados, simbolo, empresa });
   };
 
   return (
@@ -103,14 +103,22 @@ const ArticuloEditModal: React.FC<ArticuloEditModalProps> = ({ articulo, open, o
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="imagen-edit" className="form-label">Imagen (opcional)</label>
-                <input
-                  id="imagen-edit"
-                  type="file"
-                  accept="image/*"
-                  onChange={e => setImagen(e.target.files?.[0] || null)}
-                  className="form-control"
-                />
+                <label htmlFor="simbolo-edit" className="form-label">Símbolo</label>
+                <select
+                  id="simbolo-edit"
+                  value={simbolo}
+                  onChange={e => setSimbolo(e.target.value)}
+                  className="form-select"
+                  required
+                >
+                  <option value="☕">☕ Café</option>
+                  <option value="🥛">🥛 Leche</option>
+                  <option value="🍫">🍫 Chocolate</option>
+                  <option value="🍽️">🍽️ Cubiertos</option>
+                  <option value="🥤">🥤 Vasos</option>
+                  <option value="🍵">🍵 Té</option>
+                  <option value="📦">📦 Otro</option>
+                </select>
               </div>
             </div>
             <div className="modal-footer">

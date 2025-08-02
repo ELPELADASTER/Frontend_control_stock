@@ -8,7 +8,7 @@ export interface Articulo {
   cantidad: number;
   utilizados: number;
   disponibles: number;
-  imagen?: string;
+  simbolo?: string;
   created_at?: string;
   updated_at?: string;
   empresa?: string;
@@ -46,11 +46,9 @@ const ListaArticulos: React.FC<ListaArticulosProps> = ({ articulos, onEditar, on
             {articulos.map(articulo => (
               <tr key={articulo.id} className="align-middle">
                 <td>
-                  {articulo.imagen ? (
-                    <img src={`${process.env.NEXT_PUBLIC_API_URL2}${articulo.imagen}`} alt={articulo.nombre} className="img-thumbnail shadow-sm" style={{width: 56, height: 56, objectFit: 'cover', borderRadius: '50%'}} />
-                  ) : (
-                    <span className="fs-3 bg-light d-inline-flex align-items-center justify-content-center rounded-circle border shadow-sm" style={{width: 56, height: 56}}>📦</span>
-                  )}
+                  <span className="fs-3 bg-light d-inline-flex align-items-center justify-content-center rounded-circle border shadow-sm" style={{width: 56, height: 56}}>
+                    {articulo.simbolo || '📦'}
+                  </span>
                 </td>
                 <td className="fw-semibold text-truncate" style={{maxWidth: 180}}>{articulo.nombre}</td>
                 <td>

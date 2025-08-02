@@ -5,7 +5,7 @@ export interface Articulo {
   id: number;
   nombre: string;
   cantidad: number;
-  imagen?: string;
+  simbolo?: string;
 }
 
 interface ArticuloDetalleProps {
@@ -33,11 +33,9 @@ const ArticuloDetalle: React.FC<ArticuloDetalleProps> = ({ articulo, onUtilizar 
 
   return (
     <div className="glass-card p-6 flex gap-6 items-center hover:shadow-xl transition group">
-      {articulo.imagen ? (
-        <img src={`${process.env.NEXT_PUBLIC_API_URL}${articulo.imagen}`} alt={articulo.nombre} className="rounded-xl w-24 h-24 object-cover border border-border shadow-sm" />
-      ) : (
-        <span className="text-4xl bg-background rounded-xl w-24 h-24 flex items-center justify-center border border-border shadow-sm">📦</span>
-      )}
+      <span className="text-4xl bg-background rounded-xl w-24 h-24 flex items-center justify-center border border-border shadow-sm">
+        {articulo.simbolo || '📦'}
+      </span>
       <div className="flex-1">
         <div className="flex items-center mb-2">
           <h3 className="text-xl font-bold text-primary mr-2 truncate max-w-[70%]">{articulo.nombre}</h3>

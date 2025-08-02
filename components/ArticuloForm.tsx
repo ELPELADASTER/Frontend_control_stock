@@ -11,7 +11,7 @@ const EMPRESAS = ['Telecom', 'Pago Online'];
 const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, onEmpresaChange }) => {
   const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState(0);
-  const [imagen, setImagen] = useState<File | null>(null);
+  const [simbolo, setSimbolo] = useState('📦');
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, 
     const formData = new FormData();
     formData.append('nombre', nombre);
     formData.append('cantidad', cantidad.toString());
-    if (imagen) formData.append('imagen', imagen);
+    formData.append('simbolo', simbolo);
     try {
       formData.append('empresa', empresa);
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL2}/api/articulos`, {
@@ -38,7 +38,7 @@ const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, 
       }
       setNombre('');
       setCantidad(0);
-      setImagen(null);
+      setSimbolo('📦');
       onArticuloCreado();
     } catch (err) {
       setError('Error de red al crear el artículo');
@@ -87,14 +87,22 @@ const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, 
             />
           </div>
           <div className="col-12">
-            <label htmlFor="imagen" className="form-label fw-semibold">Imagen (opcional)</label>
-            <input
-              id="imagen"
-              type="file"
-              accept="image/*"
-              onChange={e => setImagen(e.target.files?.[0] || null)}
-              className="form-control rounded-pill shadow-sm"
-            />
+            <label htmlFor="simbolo" className="form-label fw-semibold">Símbolo</label>
+            <select
+              id="simbolo"
+              value={simbolo}
+              onChange={e => setSimbolo(e.target.value)}
+              className="form-select rounded-pill shadow-sm"
+              required
+            >
+              <option value="☕">☕ Café</option>
+              <option value="🥛">🥛 Leche</option>
+              <option value="🍫">🍫 Chocolate</option>
+              <option value="🍽️">🍽️ Cubiertos</option>
+              <option value="🥤">🥤 Vasos</option>
+              <option value="🍵">🍵 Té</option>
+              <option value="📦">📦 Otro</option>
+            </select>
           </div>
           <div className="col-12 d-grid">
             <button type="submit" className="btn btn-primary btn-lg rounded-pill shadow">
