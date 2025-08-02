@@ -21,15 +21,11 @@ const ArticuloForm: React.FC<ArticuloFormProps> = ({ onArticuloCreado, empresa, 
       setError('Por favor ingresa un nombre y una cantidad mayor a 0.');
       return;
     }
-    const formData = new FormData();
-    formData.append('nombre', nombre);
-    formData.append('cantidad', cantidad.toString());
-    formData.append('simbolo', simbolo);
     try {
-      formData.append('empresa', empresa);
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL2}/api/articulos`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, cantidad, simbolo, empresa }),
       });
       if (!res.ok) {
         const data = await res.json();
