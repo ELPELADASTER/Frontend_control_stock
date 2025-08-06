@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react';
 import ArticuloForm from '../components/ArticuloForm';
 import ListaArticulos, { Articulo } from '../components/ListaArticulos';
 import ArticuloEditModal from '../components/ArticuloEditModal';
+import Maquinas from '../components/Maquinas';
+import CargasMaquinas from '../components/CargasMaquinas';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EMPRESAS = ['Telecom', 'Pago Online'];
 const HomePage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'articulos' | 'maquinas' | 'cargas'>('articulos');
   const [empresa, setEmpresa] = useState<string>('Telecom');
   const [empresaForm, setEmpresaForm] = useState<string>('Telecom');
   const [articulos, setArticulos] = useState<Articulo[]>([]);
@@ -19,6 +22,11 @@ const HomePage: React.FC = () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL2}/api/articulos?empresa=${encodeURIComponent(empresaActual)}`);
     const data = await res.json();
     setArticulos(data);
+  };
+
+  const handleActualizarStock = () => {
+    console.log('handleActualizarStock llamado, actualizando lista de artículos...');
+    fetchArticulos(); // Llamar sin parámetros para usar la empresa actual
   };
 
   useEffect(() => {
@@ -90,35 +98,89 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background via-white to-primary/10 flex flex-col items-center py-12 px-2">
-      <div className="w-full max-w-3xl mx-auto">
-        <h1 className="text-3xl font-extrabold text-primary mb-4 text-center tracking-tight drop-shadow">Gestión de Artículos</h1>
-        <div className="mb-12">
-          <ArticuloForm onArticuloCreado={handleArticuloCreado} empresa={empresaForm} onEmpresaChange={handleEmpresaFormChange} />
+    <main className="min-h-screen bg-gradient-to-br from-background via-white to-primary/10">
+      <div className="container-fluid">
+        {/* Navigation Tabs */}
+        <div className="pt-4 mb-4">
+          <ul className="nav nav-tabs justify-content-center">
+            <li className="nav-item">
+              <button 
+                className={`nav-link ${activeTab === 'articulos' ? 'active' : ''}`}
+                onClick={() => setActiveTab('articulos')}
+              >
+                📦 Gestión de Artículos
+              </button>
+            </li>
+            <li className="nav-item">
+              <button 
+                className={`nav-link ${activeTab === 'maquinas' ? 'active' : ''}`}
+                onClick={() => setActiveTab('maquinas')}
+              >
+                🏢 Gestión de Máquinas
+              </button>
+            </li>
+            <li className="nav-item">
+              <button 
+                className={`nav-link ${activeTab === 'cargas' ? 'active' : ''}`}
+                onClick={() => setActiveTab('cargas')}
+              >
+                📈 Cargas de Máquinas
+              </button>
+            </li>
+          </ul>
         </div>
-        <div className="mb-4 mx-auto" style={{maxWidth: 400}}>
-          <div className="card bg-light shadow-sm border-0 rounded-4 px-3 py-2">
-            <div className="d-flex align-items-center gap-2">
-              <i className="bi bi-building text-primary fs-4"></i>
-              <label className="me-2 fw-semibold mb-0 small">Filtrar por empresa</label>
-              <select className="form-select form-select-sm w-auto rounded-pill ms-2" value={empresa} onChange={handleEmpresaChange} style={{minWidth: 120}}>
-                <option value="Telecom">Telecom</option>
-                <option value="Pago Online">Pago Online</option>
-              </select>
+
+        {/* Company Selector */}
+        <div className="row justify-content-center mb-4">
+          <div className="col-md-6 col-lg-4">
+            <div className="card bg-light shadow-sm border-0 rounded-4">
+              <div className="card-body px-3 py-2">
+                <div className="d-flex align-items-center gap-2">
+                  <i className="bi bi-building text-primary fs-4"></i>
+                  <label className="me-2 fw-semibold mb-0 small">Empresa:</label>
+                  <select 
+                    className="form-select form-select-sm w-auto rounded-pill ms-2" 
+                    value={empresa} 
+                    onChange={handleEmpresaChange} 
+                    style={{minWidth: 120}}
+                  >
+                    <option value="Telecom">Telecom</option>
+                    <option value="Pago Online">Pago Online</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center mb-10">
-          <div className="flex-grow h-px bg-border" />
-          <span className="mx-4 text-textSecondary text-sm font-medium select-none">Artículos cargados</span>
-          <div className="flex-grow h-px bg-border" />
-        </div>
-        <ListaArticulos
-          articulos={articulos}
-          onEditar={handleEditar}
-          onEliminar={handleEliminar}
-        />
+
+        {/* Tab Content */}
+        {activeTab === 'articulos' && (
+          <div className="row justify-content-center">
+            <div className="col-xl-10">
+              <div className="mb-4">
+                <ArticuloForm onArticuloCreado={handleArticuloCreado} empresa={empresaForm} onEmpresaChange={handleEmpresaFormChange} />
+              </div>
+              <ListaArticulos
+                articulos={articulos}
+                onEditar={handleEditar}
+                onEliminar={handleEliminar}
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'maquinas' && (
+          <Maquinas empresa={empresa} />
+        )}
+
+        {activeTab === 'cargas' && (
+          <CargasMaquinas 
+            empresaInicial={empresa} 
+            onActualizarStock={handleActualizarStock}
+          />
+        )}
       </div>
+
       <ArticuloEditModal
         articulo={editArticulo}
         open={modalOpen}
