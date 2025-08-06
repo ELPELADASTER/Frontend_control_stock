@@ -86,6 +86,10 @@ a {
   .nav-tabs .nav-link {
     font-size: 0.9rem;
     padding: 8px 12px;
+    min-height: 44px; /* Tamaño mínimo táctil */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .form-label {
@@ -95,9 +99,87 @@ a {
   
   .btn {
     touch-action: manipulation;
+    min-height: 44px; /* Tamaño mínimo táctil */
+  }
+  
+  .btn-sm {
+    min-height: 36px;
   }
   
   .table-responsive {
     border: none;
   }
+  
+  /* Espaciado específico para móviles */
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .row > .col-12,
+  .row > [class*="col-"] {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Inputs y selects más amigables para móviles */
+  .form-control,
+  .form-select {
+    font-size: 16px; /* Previene zoom en iOS */
+    min-height: 44px;
+  }
+  
+  /* Botones adaptativos */
+  .d-sm-none {
+    white-space: nowrap;
+  }
+}
+
+/* Mejoras para tablets */
+@media (min-width: 577px) and (max-width: 768px) {
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 10px 16px;
+  }
+}
+
+/* Mejoras generales para mejor UX */
+.nav-tabs .nav-link {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Formularios responsivos */
+.form-control, .form-select {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Botones con mejor accesibilidad */
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
 }

@@ -105,26 +105,38 @@ const HomePage: React.FC = () => {
           <ul className="nav nav-tabs justify-content-center flex-wrap">
             <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'articulos' ? 'active' : ''} px-2 px-md-3`}
+                className={`nav-link ${activeTab === 'articulos' ? 'active' : ''} px-3 px-md-4 py-2 rounded-top`}
                 onClick={() => setActiveTab('articulos')}
               >
-                <span className="d-none d-sm-inline">📦 Gestión de </span>Artículos
+                <span className="d-flex align-items-center gap-1">
+                  <span>📦</span>
+                  <span className="d-none d-sm-inline">Gestión de </span>
+                  <span>Artículos</span>
+                </span>
               </button>
             </li>
             <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'maquinas' ? 'active' : ''} px-2 px-md-3`}
+                className={`nav-link ${activeTab === 'maquinas' ? 'active' : ''} px-3 px-md-4 py-2 rounded-top`}
                 onClick={() => setActiveTab('maquinas')}
               >
-                <span className="d-none d-sm-inline">🏢 Gestión de </span>Máquinas
+                <span className="d-flex align-items-center gap-1">
+                  <span>🏢</span>
+                  <span className="d-none d-sm-inline">Gestión de </span>
+                  <span>Máquinas</span>
+                </span>
               </button>
             </li>
             <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'cargas' ? 'active' : ''} px-2 px-md-3`}
+                className={`nav-link ${activeTab === 'cargas' ? 'active' : ''} px-3 px-md-4 py-2 rounded-top`}
                 onClick={() => setActiveTab('cargas')}
               >
-                <span className="d-none d-sm-inline">📈 Cargas de </span>Máquinas
+                <span className="d-flex align-items-center gap-1">
+                  <span>📈</span>
+                  <span className="d-none d-sm-inline">Gestión de </span>
+                  <span>Cargas</span>
+                </span>
               </button>
             </li>
           </ul>
@@ -132,17 +144,19 @@ const HomePage: React.FC = () => {
 
         {/* Company Selector */}
         <div className="row justify-content-center mb-4">
-          <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+          <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
             <div className="card bg-light shadow-sm border-0 rounded-4">
-              <div className="card-body px-3 py-2">
-                <div className="d-flex align-items-center gap-2 flex-wrap justify-content-center justify-sm-start">
-                  <i className="bi bi-building text-primary fs-4 d-none d-sm-inline"></i>
-                  <label className="me-2 fw-semibold mb-0 small">Empresa:</label>
+              <div className="card-body px-3 py-3">
+                <div className="d-flex align-items-center gap-2 flex-column flex-sm-row justify-content-center">
+                  <div className="d-flex align-items-center gap-2">
+                    <i className="bi bi-building text-primary fs-4"></i>
+                    <label className="fw-semibold mb-0 text-nowrap">Empresa:</label>
+                  </div>
                   <select 
-                    className="form-select form-select-sm w-auto rounded-pill flex-grow-1 flex-sm-grow-0" 
+                    className="form-select form-select-sm rounded-pill flex-grow-1" 
                     value={empresa} 
                     onChange={handleEmpresaChange} 
-                    style={{minWidth: 120, maxWidth: 200}}
+                    style={{minWidth: 140, maxWidth: 200}}
                   >
                     <option value="Telecom">Telecom</option>
                     <option value="Pago Online">Pago Online</option>

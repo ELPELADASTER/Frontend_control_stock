@@ -283,33 +283,20 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
             </span>
           </div>
         </div>
-        <button 
-          className="btn btn-primary btn-sm d-sm-none"
-          onClick={() => setShowForm(true)}
-        >
-          <TrendingDown className="me-1" size={16} />
-          Nueva
-        </button>
-        <button 
-          className="btn btn-primary d-none d-sm-inline-flex"
-          onClick={() => setShowForm(true)}
-        >
-          <TrendingDown className="me-2" />
-          Nueva Carga
-        </button>
       </div>
 
       {/* Filtros */}
       <div className="card mb-4">
-        <div className="card-body">
+        <div className="card-body p-3 p-md-4">
           <div className="row g-3">
-            <div className="col-12 col-md-3">
-              <label className="form-label">
+            <div className="col-12 col-lg-3">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Package size={14} className="me-1" />
-                Máquina:
+                <span className="d-none d-sm-inline">Máquina:</span>
+                <span className="d-sm-none">Máq.:</span>
               </label>
               <select 
-                className="form-select"
+                className="form-select rounded-pill"
                 value={filtros.maquina_id}
                 onChange={(e) => setFiltros({...filtros, maquina_id: e.target.value})}
               >
@@ -322,13 +309,14 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 ))}
               </select>
             </div>
-            <div className="col-12 col-md-3">
-              <label className="form-label">
+            <div className="col-12 col-lg-3">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Package size={14} className="me-1" />
-                Artículo:
+                <span className="d-none d-sm-inline">Artículo:</span>
+                <span className="d-sm-none">Art.:</span>
               </label>
               <select 
-                className="form-select"
+                className="form-select rounded-pill"
                 value={filtros.articulo_id}
                 onChange={(e) => setFiltros({...filtros, articulo_id: e.target.value})}
               >
@@ -340,32 +328,32 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 ))}
               </select>
             </div>
-            <div className="col-6 col-md-3">
-              <label className="form-label">
+            <div className="col-6 col-lg-3">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Calendar size={14} className="me-1" />
                 Desde:
               </label>
               <input
                 type="date"
-                className="form-control"
+                className="form-control rounded-pill"
                 value={filtros.fecha_desde}
                 onChange={(e) => setFiltros({...filtros, fecha_desde: e.target.value})}
               />
             </div>
-            <div className="col-6 col-md-3">
-              <label className="form-label">
+            <div className="col-6 col-lg-3">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Calendar size={14} className="me-1" />
                 Hasta:
               </label>
               <input
                 type="date"
-                className="form-control"
+                className="form-control rounded-pill"
                 value={filtros.fecha_hasta}
                 onChange={(e) => setFiltros({...filtros, fecha_hasta: e.target.value})}
               />
             </div>
           </div>
-          <div className="mt-3 d-flex flex-column flex-sm-row gap-2">
+          <div className="mt-3 d-flex flex-column flex-sm-row gap-2 align-items-center">
             <button 
               className="btn btn-primary flex-fill flex-sm-grow-0" 
               onClick={fetchCargas}
@@ -388,6 +376,13 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
               <RotateCcw className="me-1" size={16} />
               <span className="d-none d-sm-inline">Limpiar </span>Filtros
             </button>
+            <button 
+              className="btn btn-success flex-fill flex-sm-grow-0" 
+              onClick={() => setShowForm(true)}
+            >
+              <TrendingDown className="me-1" size={16} />
+              <span className="d-none d-sm-inline">Nueva </span>Carga
+            </button>
           </div>
         </div>
       </div>
@@ -395,19 +390,23 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
       {/* Formulario para Múltiples Productos */}
       {showForm && (
         <div className="card mb-4">
-          <div className="card-header">
-            <h5 className="mb-0">Registrar Carga de Múltiples Productos</h5>
+          <div className="card-header bg-success text-white">
+            <h5 className="mb-0 d-flex align-items-center">
+              <TrendingDown size={18} className="me-2" />
+              <span className="d-none d-sm-inline">Registrar Carga de Múltiples Productos</span>
+              <span className="d-sm-none">Nueva Carga</span>
+            </h5>
           </div>
-          <div className="card-body">
+          <div className="card-body p-3 p-md-4">
             <form onSubmit={handleSubmit}>
               <div className="row g-3 mb-4">
-                <div className="col-md-6">
-                  <label className="form-label">
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <Package size={14} className="me-1" />
                     Máquina *
                   </label>
                   <select
-                    className="form-select"
+                    className="form-select rounded-pill"
                     value={formData.maquina_id}
                     onChange={(e) => setFormData({...formData, maquina_id: e.target.value})}
                     required
@@ -422,14 +421,14 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                     ))}
                   </select>
                 </div>
-                <div className="col-md-6">
-                  <label className="form-label">
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <Users size={14} className="me-1" />
                     Usuario
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-pill"
                     placeholder="Nombre del operador"
                     value={formData.usuario}
                     onChange={(e) => setFormData({...formData, usuario: e.target.value})}
@@ -439,24 +438,24 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
 
               {/* Lista de Productos */}
               <div className="mb-4">
-                <div className="d-flex justify-content-between align-items-center mb-3">
+                <div className="d-flex justify-content-between align-items-center mb-3 flex-column flex-sm-row gap-2">
                   <h6 className="mb-0">Productos a Cargar</h6>
                   <button
                     type="button"
-                    className="btn btn-sm btn-outline-primary"
+                    className="btn btn-sm btn-outline-primary rounded-pill"
                     onClick={agregarProducto}
                   >
                     <Plus size={16} className="me-1" />
-                    Agregar Producto
+                    <span className="d-none d-sm-inline">Agregar </span>Producto
                   </button>
                 </div>
 
                 {productos.map((producto, index) => (
-                  <div key={index} className="row g-3 mb-3 p-3 border rounded">
-                    <div className="col-md-5">
-                      <label className="form-label">Artículo *</label>
+                  <div key={index} className="row g-3 mb-3 p-3 border rounded-4">
+                    <div className="col-12 col-md-5">
+                      <label className="form-label fw-semibold">Artículo *</label>
                       <select
-                        className="form-select"
+                        className="form-select rounded-pill"
                         value={producto.articulo_id}
                         onChange={(e) => actualizarProducto(index, 'articulo_id', e.target.value)}
                         required
@@ -469,11 +468,11 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                         ))}
                       </select>
                     </div>
-                    <div className="col-md-4">
-                      <label className="form-label">Cantidad *</label>
+                    <div className="col-8 col-md-4">
+                      <label className="form-label fw-semibold">Cantidad *</label>
                       <input
                         type="number"
-                        className="form-control"
+                        className="form-control rounded-pill"
                         min="1"
                         max={articulos.find(a => a.id === parseInt(producto.articulo_id))?.disponibles || 999}
                         value={producto.cantidad_cargada}
@@ -482,17 +481,17 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                       />
                       {producto.articulo_id && (
                         <small className="text-muted">
-                          Stock disponible: {articulos.find(a => a.id === parseInt(producto.articulo_id))?.disponibles || 0}
+                          Stock: {articulos.find(a => a.id === parseInt(producto.articulo_id))?.disponibles || 0}
                         </small>
                       )}
                     </div>
-                    <div className="col-md-3">
-                      <label className="form-label">&nbsp;</label>
-                      <div>
+                    <div className="col-4 col-md-3">
+                      <label className="form-label d-none d-md-block">&nbsp;</label>
+                      <div className="d-flex align-items-center h-100">
                         {productos.length > 1 && (
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm"
+                            className="btn btn-outline-danger btn-sm rounded-pill"
                             onClick={() => eliminarProducto(index)}
                           >
                             <Trash2 size={16} />
@@ -506,12 +505,12 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
 
               <div className="row g-3 mb-4">
                 <div className="col-12">
-                  <label className="form-label">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <History size={14} className="me-1" />
                     Observaciones
                   </label>
                   <textarea
-                    className="form-control"
+                    className="form-control rounded-3"
                     rows={2}
                     placeholder="Notas adicionales sobre la carga (opcional)"
                     value={formData.observaciones}
@@ -520,16 +519,16 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 </div>
               </div>
 
-              <div className="d-flex gap-2">
+              <div className="d-flex gap-2 flex-column flex-sm-row">
                 <button 
                   type="submit" 
-                  className="btn btn-success"
+                  className="btn btn-success rounded-pill flex-fill flex-sm-grow-0"
                   disabled={!formData.maquina_id || productos.filter(p => p.articulo_id && p.cantidad_cargada > 0).length === 0}
                 >
                   <TrendingDown className="me-1" size={16} />
-                  Registrar Cargas
+                  <span className="d-none d-sm-inline">Registrar </span>Cargas
                 </button>
-                <button type="button" className="btn btn-secondary" onClick={resetForm}>
+                <button type="button" className="btn btn-secondary rounded-pill flex-fill flex-sm-grow-0" onClick={resetForm}>
                   <RotateCcw className="me-1" size={16} />
                   Cancelar
                 </button>

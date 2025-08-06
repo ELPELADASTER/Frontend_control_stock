@@ -187,46 +187,34 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
             )}
           </div>
         </div>
-        <button 
-          className="btn btn-primary btn-sm d-sm-none"
-          onClick={() => setShowForm(true)}
-        >
-          <Plus className="me-1" size={16} />
-          Nueva
-        </button>
-        <button 
-          className="btn btn-primary d-none d-sm-inline-flex"
-          onClick={() => setShowForm(true)}
-        >
-          <Plus className="me-2" size={18} />
-          Nueva Máquina
-        </button>
       </div>
 
       {/* Filtros y Búsqueda */}
       <div className="card mb-4 shadow-sm">
-        <div className="card-body">
+        <div className="card-body p-3 p-md-4">
           <div className="row g-3 align-items-end">
-            <div className="col-12 col-md-4">
-              <label className="form-label fw-semibold">
+            <div className="col-12 col-lg-4">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Search size={16} className="me-1" />
-                Buscar máquinas:
+                <span className="d-none d-sm-inline">Buscar máquinas:</span>
+                <span className="d-sm-none">Buscar:</span>
               </label>
               <input
                 type="text"
-                className="form-control"
-                placeholder="Buscar por nombre, empresa, edificio o ubicación..."
+                className="form-control rounded-pill"
+                placeholder="Nombre, empresa, edificio..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
               />
             </div>
-            <div className="col-12 col-md-4">
-              <label className="form-label fw-semibold">
+            <div className="col-12 col-sm-6 col-lg-4">
+              <label className="form-label fw-semibold d-flex align-items-center">
                 <Filter size={16} className="me-1" />
-                Filtrar por edificio:
+                <span className="d-none d-sm-inline">Filtrar por edificio:</span>
+                <span className="d-sm-none">Edificio:</span>
               </label>
               <select 
-                className="form-select"
+                className="form-select rounded-pill"
                 value={edificioSeleccionado}
                 onChange={(e) => setEdificioSeleccionado(e.target.value)}
               >
@@ -236,11 +224,25 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
                 ))}
               </select>
             </div>
-            <div className="col-12 col-md-4">
-              <div className="d-flex align-items-center justify-content-center justify-md-start">
-                <span className="badge bg-info text-dark fs-6">
-                  {maquinasFiltradas.length} máquina{maquinasFiltradas.length !== 1 ? 's' : ''} encontrada{maquinasFiltradas.length !== 1 ? 's' : ''}
+            <div className="col-12 col-sm-6 col-lg-4">
+              <div className="d-flex align-items-center justify-content-center justify-lg-start gap-2 flex-wrap">
+                <span className="badge bg-info text-dark fs-6 px-3 py-2">
+                  {maquinasFiltradas.length} máquina{maquinasFiltradas.length !== 1 ? 's' : ''}
                 </span>
+                <button 
+                  className="btn btn-primary btn-sm d-sm-none"
+                  onClick={() => setShowForm(true)}
+                >
+                  <Plus className="me-1" size={16} />
+                  Nueva
+                </button>
+                <button 
+                  className="btn btn-primary d-none d-sm-inline-flex"
+                  onClick={() => setShowForm(true)}
+                >
+                  <Plus className="me-2" size={18} />
+                  Nueva Máquina
+                </button>
               </div>
             </div>
           </div>
@@ -251,35 +253,37 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
       {showForm && (
         <div className="card mb-4 shadow-sm">
           <div className="card-header bg-primary text-white">
-            <h5 className="mb-0">
+            <h5 className="mb-0 d-flex align-items-center">
               <Settings size={18} className="me-2" />
-              {editMaquina ? 'Editar Máquina' : 'Nueva Máquina'}
+              <span className="d-none d-sm-inline">{editMaquina ? 'Editar' : 'Nueva'} Máquina</span>
+              <span className="d-sm-none">{editMaquina ? 'Editar' : 'Nueva'}</span>
             </h5>
           </div>
-          <div className="card-body">
+          <div className="card-body p-3 p-md-4">
             <form onSubmit={handleSubmit}>
               <div className="row g-3">
-                <div className="col-md-4">
-                  <label className="form-label fw-semibold">
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <Settings size={16} className="me-1" />
-                    Nombre de la máquina *
+                    <span className="d-none d-sm-inline">Nombre de la máquina *</span>
+                    <span className="d-sm-none">Nombre *</span>
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-pill"
                     placeholder="Ej: Máquina Expendedora A1"
                     value={formData.nombre}
                     onChange={(e) => setFormData({...formData, nombre: e.target.value})}
                     required
                   />
                 </div>
-                <div className="col-md-4">
-                  <label className="form-label fw-semibold">
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <Users size={16} className="me-1" />
                     Empresa *
                   </label>
                   <select
-                    className="form-select"
+                    className="form-select rounded-pill"
                     value={formData.empresa}
                     onChange={(e) => setFormData({...formData, empresa: e.target.value})}
                     required
@@ -288,48 +292,45 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
                     <option value="Pago Online">Pago Online</option>
                   </select>
                 </div>
-                <div className="col-md-4">
-                  <label className="form-label fw-semibold">
+                <div className="col-12 col-sm-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <Building2 size={16} className="me-1" />
                     Edificio *
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    placeholder="Ej: Edificio Principal, Torre A, etc."
+                    className="form-control rounded-pill"
+                    placeholder="Ej: Edificio Principal, Torre A"
                     value={formData.edificio}
                     onChange={(e) => setFormData({...formData, edificio: e.target.value})}
                     required
                   />
                 </div>
-                <div className="col-12">
-                  <label className="form-label fw-semibold">
+                <div className="col-12 col-sm-6">
+                  <label className="form-label fw-semibold d-flex align-items-center">
                     <MapPin size={16} className="me-1" />
-                    Ubicación específica (opcional)
+                    <span className="d-none d-sm-inline">Ubicación específica (opcional)</span>
+                    <span className="d-sm-none">Ubicación</span>
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    placeholder="Ej: Planta baja junto al ascensor, Piso 3 sala de descanso..."
+                    className="form-control rounded-pill"
+                    placeholder="Ej: Planta baja junto al ascensor"
                     value={formData.ubicacion}
                     onChange={(e) => setFormData({...formData, ubicacion: e.target.value})}
                   />
-                  <div className="form-text">
-                    Especifica la ubicación exacta dentro del edificio para facilitar su localización
-                  </div>
                 </div>
               </div>
-              <div className="mt-4 d-flex justify-content-between">
-                <div>
-                  <small className="text-muted">* Campos obligatorios</small>
-                </div>
-                <div>
-                  <button type="button" className="btn btn-outline-secondary me-2" onClick={resetForm}>
+              <div className="mt-4 d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+                <small className="text-muted">* Campos obligatorios</small>
+                <div className="d-flex gap-2 w-100 w-sm-auto">
+                  <button type="button" className="btn btn-outline-secondary flex-fill flex-sm-grow-0" onClick={resetForm}>
                     Cancelar
                   </button>
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary flex-fill flex-sm-grow-0">
                     <Plus size={16} className="me-1" />
-                    {editMaquina ? 'Actualizar' : 'Crear'} Máquina
+                    <span className="d-none d-sm-inline">{editMaquina ? 'Actualizar' : 'Crear'} Máquina</span>
+                    <span className="d-sm-none">{editMaquina ? 'Actualizar' : 'Crear'}</span>
                   </button>
                 </div>
               </div>
