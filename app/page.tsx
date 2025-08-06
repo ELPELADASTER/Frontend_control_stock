@@ -102,29 +102,29 @@ const HomePage: React.FC = () => {
       <div className="container-fluid">
         {/* Navigation Tabs */}
         <div className="pt-4 mb-4">
-          <ul className="nav nav-tabs justify-content-center">
-            <li className="nav-item">
+          <ul className="nav nav-tabs justify-content-center flex-wrap">
+            <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'articulos' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'articulos' ? 'active' : ''} px-2 px-md-3`}
                 onClick={() => setActiveTab('articulos')}
               >
-                📦 Gestión de Artículos
+                <span className="d-none d-sm-inline">📦 Gestión de </span>Artículos
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'maquinas' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'maquinas' ? 'active' : ''} px-2 px-md-3`}
                 onClick={() => setActiveTab('maquinas')}
               >
-                🏢 Gestión de Máquinas
+                <span className="d-none d-sm-inline">🏢 Gestión de </span>Máquinas
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mb-2 mb-md-0">
               <button 
-                className={`nav-link ${activeTab === 'cargas' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'cargas' ? 'active' : ''} px-2 px-md-3`}
                 onClick={() => setActiveTab('cargas')}
               >
-                📈 Cargas de Máquinas
+                <span className="d-none d-sm-inline">📈 Cargas de </span>Máquinas
               </button>
             </li>
           </ul>
@@ -132,17 +132,17 @@ const HomePage: React.FC = () => {
 
         {/* Company Selector */}
         <div className="row justify-content-center mb-4">
-          <div className="col-md-6 col-lg-4">
+          <div className="col-12 col-sm-8 col-md-6 col-lg-4">
             <div className="card bg-light shadow-sm border-0 rounded-4">
               <div className="card-body px-3 py-2">
-                <div className="d-flex align-items-center gap-2">
-                  <i className="bi bi-building text-primary fs-4"></i>
+                <div className="d-flex align-items-center gap-2 flex-wrap justify-content-center justify-sm-start">
+                  <i className="bi bi-building text-primary fs-4 d-none d-sm-inline"></i>
                   <label className="me-2 fw-semibold mb-0 small">Empresa:</label>
                   <select 
-                    className="form-select form-select-sm w-auto rounded-pill ms-2" 
+                    className="form-select form-select-sm w-auto rounded-pill flex-grow-1 flex-sm-grow-0" 
                     value={empresa} 
                     onChange={handleEmpresaChange} 
-                    style={{minWidth: 120}}
+                    style={{minWidth: 120, maxWidth: 200}}
                   >
                     <option value="Telecom">Telecom</option>
                     <option value="Pago Online">Pago Online</option>

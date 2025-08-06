@@ -188,7 +188,14 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
           </div>
         </div>
         <button 
-          className="btn btn-primary"
+          className="btn btn-primary btn-sm d-sm-none"
+          onClick={() => setShowForm(true)}
+        >
+          <Plus className="me-1" size={16} />
+          Nueva
+        </button>
+        <button 
+          className="btn btn-primary d-none d-sm-inline-flex"
           onClick={() => setShowForm(true)}
         >
           <Plus className="me-2" size={18} />
@@ -200,7 +207,7 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
       <div className="card mb-4 shadow-sm">
         <div className="card-body">
           <div className="row g-3 align-items-end">
-            <div className="col-md-4">
+            <div className="col-12 col-md-4">
               <label className="form-label fw-semibold">
                 <Search size={16} className="me-1" />
                 Buscar máquinas:
@@ -213,7 +220,7 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
                 onChange={(e) => setBusqueda(e.target.value)}
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-md-4">
               <label className="form-label fw-semibold">
                 <Filter size={16} className="me-1" />
                 Filtrar por edificio:
@@ -229,8 +236,8 @@ const Maquinas: React.FC<MaquinasProps> = ({ empresa }) => {
                 ))}
               </select>
             </div>
-            <div className="col-md-4">
-              <div className="d-flex align-items-center">
+            <div className="col-12 col-md-4">
+              <div className="d-flex align-items-center justify-content-center justify-md-start">
                 <span className="badge bg-info text-dark fs-6">
                   {maquinasFiltradas.length} máquina{maquinasFiltradas.length !== 1 ? 's' : ''} encontrada{maquinasFiltradas.length !== 1 ? 's' : ''}
                 </span>

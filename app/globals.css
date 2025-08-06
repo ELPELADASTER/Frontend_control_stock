@@ -67,3 +67,37 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Mejoras para móviles */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .card {
+    margin-bottom: 15px;
+  }
+  
+  .nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .nav-tabs .nav-link {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  
+  .form-label {
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+  }
+  
+  .btn {
+    touch-action: manipulation;
+  }
+  
+  .table-responsive {
+    border: none;
+  }
+}

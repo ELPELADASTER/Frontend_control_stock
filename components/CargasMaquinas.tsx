@@ -284,7 +284,14 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
           </div>
         </div>
         <button 
-          className="btn btn-primary"
+          className="btn btn-primary btn-sm d-sm-none"
+          onClick={() => setShowForm(true)}
+        >
+          <TrendingDown className="me-1" size={16} />
+          Nueva
+        </button>
+        <button 
+          className="btn btn-primary d-none d-sm-inline-flex"
           onClick={() => setShowForm(true)}
         >
           <TrendingDown className="me-2" />
@@ -296,7 +303,7 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
       <div className="card mb-4">
         <div className="card-body">
           <div className="row g-3">
-            <div className="col-md-3">
+            <div className="col-12 col-md-3">
               <label className="form-label">
                 <Package size={14} className="me-1" />
                 Máquina:
@@ -315,7 +322,7 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 ))}
               </select>
             </div>
-            <div className="col-md-3">
+            <div className="col-12 col-md-3">
               <label className="form-label">
                 <Package size={14} className="me-1" />
                 Artículo:
@@ -333,7 +340,7 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 ))}
               </select>
             </div>
-            <div className="col-md-3">
+            <div className="col-6 col-md-3">
               <label className="form-label">
                 <Calendar size={14} className="me-1" />
                 Desde:
@@ -345,7 +352,7 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
                 onChange={(e) => setFiltros({...filtros, fecha_desde: e.target.value})}
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-6 col-md-3">
               <label className="form-label">
                 <Calendar size={14} className="me-1" />
                 Hasta:
@@ -358,16 +365,16 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
               />
             </div>
           </div>
-          <div className="mt-3">
+          <div className="mt-3 d-flex flex-column flex-sm-row gap-2">
             <button 
-              className="btn btn-primary me-2" 
+              className="btn btn-primary flex-fill flex-sm-grow-0" 
               onClick={fetchCargas}
             >
               <Search className="me-1" size={16} />
-              Aplicar Filtros
+              <span className="d-none d-sm-inline">Aplicar </span>Filtros
             </button>
             <button 
-              className="btn btn-secondary" 
+              className="btn btn-secondary flex-fill flex-sm-grow-0" 
               onClick={() => {
                 setFiltros({
                   maquina_id: '',
@@ -379,7 +386,7 @@ const CargasMaquinas: React.FC<CargasMaquinasProps> = ({ empresaInicial = 'Telec
               }}
             >
               <RotateCcw className="me-1" size={16} />
-              Limpiar
+              <span className="d-none d-sm-inline">Limpiar </span>Filtros
             </button>
           </div>
         </div>
