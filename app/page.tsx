@@ -6,12 +6,14 @@ import ListaArticulos, { Articulo } from '../components/ListaArticulos';
 import ArticuloEditModal from '../components/ArticuloEditModal';
 import Maquinas from '../components/Maquinas';
 import CargasMaquinas from '../components/CargasMaquinas';
+// Import for statistics component
+import Estadisticas from '../components/Estadisticas';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EMPRESAS = ['Telecom', 'Pago Online'];
 const HomePage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'articulos' | 'maquinas' | 'cargas'>('articulos');
+  const [activeTab, setActiveTab] = useState<'articulos' | 'maquinas' | 'cargas' | 'estadisticas'>('articulos');
   const [empresa, setEmpresa] = useState<string>('Telecom');
   const [empresaForm, setEmpresaForm] = useState<string>('Telecom');
   const [articulos, setArticulos] = useState<Articulo[]>([]);
@@ -139,6 +141,18 @@ const HomePage: React.FC = () => {
                 </span>
               </button>
             </li>
+            <li className="nav-item mb-2 mb-md-0">
+              <button 
+                className={`nav-link ${activeTab === 'estadisticas' ? 'active' : ''} px-3 px-md-4 py-2 rounded-top`}
+                onClick={() => setActiveTab('estadisticas')}
+              >
+                <span className="d-flex align-items-center gap-1">
+                  <span>📊</span>
+                  <span className="d-none d-sm-inline">Estadísticas y </span>
+                  <span>Análisis</span>
+                </span>
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -192,6 +206,10 @@ const HomePage: React.FC = () => {
             empresaInicial={empresa} 
             onActualizarStock={handleActualizarStock}
           />
+        )}
+
+        {activeTab === 'estadisticas' && (
+          <Estadisticas empresa={empresa} />
         )}
       </div>
 
